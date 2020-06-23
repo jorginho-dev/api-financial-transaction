@@ -11,9 +11,9 @@ class CreateTransactionService {
   public execute({ title, value, type }: Omit<Transaction, 'id'>): Transaction {
     // TODO
 
-    const balance = this.transactionsRepository.getBalance();
+    const { total } = this.transactionsRepository.getBalance();
 
-    if (type === 'outcome' && balance.total < value) {
+    if (type === 'outcome' && total < value) {
       throw Error('Can not create outcome transaction without balance');
     }
 
